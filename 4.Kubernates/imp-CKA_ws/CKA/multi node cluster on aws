@@ -1,0 +1,10 @@
+step 1: Launch 3 instance on aws
+step 2 : install CRI (container runtime Interface ) Ex: Docker to all the machine
+
+Note: Docker Engine does not implement the CRI which is a requirement for a container runtime to work with Kubernetes.
+
+For that reason, an additional service cri-dockerd has to be installed. cri-dockerd is a project based on the legacy built-in Docker Engine support that was removed from the kubelet in version 1.24.
+
+Kubernetes releases before v1.24 included a direct integration with Docker Engine, using a component named dockershim. That special direct integration is no longer part of Kubernetes (this removal was announced as part of the v1.20 release).
+
+step 3: install kubeadm to 

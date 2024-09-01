@@ -1,0 +1,12 @@
+# kubectl run myweb --image=httpd
+apiVersion: v1
+kind: Pod
+metadata:
+    - name: myweb
+      labels:
+        country: in
+spec:
+    containers:
+        - name: mypod
+          image: "httpd"
+

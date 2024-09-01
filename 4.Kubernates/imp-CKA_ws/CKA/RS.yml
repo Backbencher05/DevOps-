@@ -1,0 +1,45 @@
+#  KIND:     ReplicaSet
+# VERSION:  apps/v1
+
+# DESCRIPTION:
+#      ReplicaSet ensures that a specified number of pod replicas are running at
+#      any given time.
+
+# RC : we use Equality based Searching
+      # (=, !=) --> AND Operation
+# RS: RS use (set/rules) based on flixible
+      # (IN ,NOT IN ) ---> OR Operation
+
+# let's create pod using RS (ReplicaSet)
+apiVersion: apps/v1
+kind: ReplicaSet
+# (information about RS)
+metadata:
+  name: myrs
+  labels:
+    country: IN 
+    env: prod
+
+# your duty/work is to keep searching/checking this "Selector", which 
+# comes under spec
+# if anyone goes down launch new, for that am providing you the "template"
+
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - {key: env, operator: In , values: [frontend, production, backend]}
+      - {key: region, operator: NotIn, values: [IN]}
+
+  template:
+    metadata:
+      name: web
+      labels:
+        env: production
+        region: IN
+
+    spec:
+      containers:
+        - name: myweb
+          image: vimal13/apache-webserver-php
+

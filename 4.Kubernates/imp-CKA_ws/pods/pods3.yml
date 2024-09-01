@@ -1,0 +1,16 @@
+# kubectl run myweb --image=vimal13/apache-webserver-php
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webpod3
+  labels:
+    app: frontend
+    env: prod
+    region: AME
+    team: team3
+
+spec:
+  containers:
+    - name: mypod3
+      image: vimal13/apache-webserver-php

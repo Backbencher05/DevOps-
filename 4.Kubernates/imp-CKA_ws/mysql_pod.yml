@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: "mydb"
+    labels:
+        app: mydb
+
+
+spec: 
+    containers:
+    - name: "mbdb"
+      image: "mysql:5.7"
+      env:
+      - name: MYSQL_ROOT_PASSWORD
+        valueFrom:
+      - name: MYSQL_USER
+        valueFrom:
+      - name: MYSQL_PASSWORD
+	valeueFrom:
+      - name: MYSQL_DATABASE
+	valueFrom:

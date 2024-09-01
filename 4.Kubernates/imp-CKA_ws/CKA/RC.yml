@@ -1,0 +1,56 @@
+# ReplicationController: 
+#  - if pod deleted launch new 
+#  - RC program , keep searching/checking using "Selector"(label), if pod goes down launch it using 
+#  - for that I am providing you the "template"
+#  - This RC alo have some name
+
+# As apiVerion, kind, metadata , spec are 4-mendatory keywords to create yml file 
+
+# let's create pod using RC(ReplicationController)
+# Hello RC your name is " "(information about RC ), which comes under metadata
+apiVersion: v1 
+kind: ReplicationController
+metadata:
+  name: myrc 
+  labels:
+    country: IN
+    env: prod
+# your duty/work is to keep searching/checking this "selector" i.e "app: web" ,comes under "spec"
+# if anyone goes down launch new, for that I am providing you "template"
+spec:
+  replicas: 3
+  selector:
+    app: web  
+  # "template" same as a code we created for Pod 
+  template:
+    metadata:
+      name: web
+      labels:
+        pod: mytom
+        app: web
+    spec:
+      containers:
+        - name: myweb
+          image: vimal13/apache-webserver-php
+  
+# -------
+# commands
+# kubectl create -f RC.yml
+# kubectl apply -f RC.yml (if changement made)
+# kubectl get rc (behind the scene we see they launch 3 pod because we have given replicas=3)
+# kubectl get pods --show-labels
+
+# Note: It(K8s) also provide you the load balancing service
+#     As soon as pod start they register with the LB---> service 
+# let my desire/requirement=3 , they will launch 3 pod ,
+# Note:  we have to tell our desire state , k8s always check current state , if (desire(!=) is not equal to current),
+#  they launch and the prog. is Controller   
+
+
+# Searching 
+
+# --->  (= , !=) : these kind of searching is known as Equality based Seaching
+# kubectl get pods -l country = IN 
+
+
+

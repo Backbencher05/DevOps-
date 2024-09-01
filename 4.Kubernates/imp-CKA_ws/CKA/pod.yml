@@ -1,0 +1,57 @@
+# Pod:  Pod is a collection of containers that can run on a host. This resource is
+#      created by clients and scheduled onto hosts.
+
+# Req: I want to launch one container 
+# using images: "httpd", give some name: "" 
+# but we are in kubernates , so launch this container inside the pod, having some name: " "
+
+# 4-mendatory keywords used:
+
+# 1. apiVerion
+# 2. kind
+# 3. metadata
+# 4. spec
+
+
+# command: # kubectl run myweb --image=httpd
+# lets convert this command into yml file
+
+# pod details
+apiVersion: v1 
+kind: Pod 
+metadata:
+  # name of pod
+  name: webpod2  
+  # labels used to search
+  labels:
+    app: frontend
+    env: prod
+    region: US
+    team: team2
+# container details
+spec:
+  containers:
+    # name of container 
+    # In one pod we can launch multiple containers so it become list
+    - name: mypod2  
+      image: vimal13/apache-webserver-php
+
+
+# commands  
+
+# kubectl explain pod  //to see the details or to learn more about the pod:
+# kubectl create -f pod.yml //To create the pod
+# kubectl describe pod  webpod2(name of pod)   //to see the description of the pod
+# kubectl get pod -l region=US      // search the pod using label
+
+
+# Note: if we delete this pod it will delete, but we don't want that
+# we want some one who will monitor my pods, if pod deleted it automaically
+# launch new pod for me for that we have: "controllers"
+
+# 1. RC (Replication controller)
+# 2. RS (Replica Set
+# 3. Deployment
+# 4. Job
+# 5. CronJob
+# 6. DaemonSet

@@ -1,0 +1,24 @@
+---
+# hello rc, info about rc
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrc1
+
+# keep checking this selector, if anyone goes down , launch new
+# for that am providing you the template
+spec:
+  replicas: 3
+  selector:
+    app: web
+    country: in
+  template:
+    metadata:
+      name: myrcc
+      labels:
+        app: web
+        country: in
+    spec:
+      containers:
+        - name: myrc
+          image: vimal13/apache-webserver-php
